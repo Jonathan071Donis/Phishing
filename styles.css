@@ -38,6 +38,7 @@ body {
     transition: transform 0.3s, box-shadow 0.3s;
     z-index: 2;
     margin: 20px; /* Añadir margen para evitar que toque los bordes */
+    box-sizing: border-box; /* Añadir box-sizing */
 }
 
 .container:hover {
@@ -62,6 +63,7 @@ h1 i {
     gap: 10px;
     margin-bottom: 20px;
     flex-wrap: wrap;
+    box-sizing: border-box; /* Añadir box-sizing */
 }
 
 input[type="text"] {
@@ -74,6 +76,8 @@ input[type="text"] {
     background: rgba(255, 255, 255, 0.2);
     color: #fff;
     transition: 0.3s;
+    box-sizing: border-box; /* Añadir box-sizing */
+    max-width: 100%; /* Asegurar que no se desborde */
 }
 
 input[type="text"]::placeholder {
@@ -95,7 +99,8 @@ button {
     font-size: 16px;
     transition: 0.3s;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
-   /* Asegurar que el botón ocupe el espacio disponible */
+    box-sizing: border-box; /* Añadir box-sizing */
+    max-width: 100%; /* Asegurar que no se desborde */
 }
 
 button:hover {
@@ -111,6 +116,7 @@ button:hover {
     text-align: center;
     font-weight: bold;
     transition: 0.3s;
+    box-sizing: border-box; /* Añadir box-sizing */
 }
 
 /* Estilos para el resultado */

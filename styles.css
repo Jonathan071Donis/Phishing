@@ -1,0 +1,191 @@
+/* Fuente y estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background: url('https://easydmarc.com/blog/wp-content/uploads/2022/11/Spear-Phishing-vs-Phishing-1.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: #fff;
+    position: relative;
+    padding: 20px; /* Añadir padding para evitar que el contenido toque los bordes */
+}
+
+/* Capa oscura para mejorar la legibilidad del contenido */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+/* Contenedor principal con efecto 3D */
+.container {
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 90%;
+    max-width: 500px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    z-index: 2;
+    margin: 20px; /* Añadir margen para evitar que toque los bordes */
+}
+
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 10px 15px 25px rgba(0, 0, 0, 0.7);
+}
+
+/* Título */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #00c3ff;
+}
+
+h1 i {
+    margin-right: 10px;
+}
+
+/* Input y botón */
+.input-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    transition: 0.3s;
+}
+
+input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+input[type="text"]:focus {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* Botón estilizado */
+button {
+    padding: 12px 18px;
+    background: linear-gradient(45deg, #00c3ff, #007bff);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+   /* Asegurar que el botón ocupe el espacio disponible */
+}
+
+button:hover {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    transform: scale(1.05);
+}
+
+/* Resultados y reportes */
+.result-container, .report-container {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* Estilos para el resultado */
+.result-container.danger {
+    background: rgba(255, 0, 0, 0.8);
+    color: white;
+    box-shadow: 5px 5px 15px rgba(255, 0, 0, 0.5);
+}
+
+.result-container.safe {
+    background: rgba(0, 255, 0, 0.8);
+    color: white;
+    box-shadow: 5px 5px 15px rgba(0, 255, 0, 0.5);
+}
+
+/* Estilos para el reporte */
+.report-container {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    box-shadow: 5px 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+.report-container.hidden {
+    display: none;
+}
+
+/* Botón de descarga del reporte */
+.report-container button {
+    margin-top: 15px;
+    width: 100%;
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    .input-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    input[type="text"], button {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .result-container, .report-container {
+        padding: 15px;
+    }
+
+    .result-container.danger, .result-container.safe {
+        font-size: 14px;
+    }
+
+    .report-container button {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 400px) {
+    h1 {
+        font-size: 20px;
+    }
+
+    input[type="text"], button {
+        padding: 10px;
+    }
+
+    .result-container, .report-container {
+        padding: 10px;
+    }
+}

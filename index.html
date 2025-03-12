@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detección de Phishing</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/12028/12028014.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="container">
+        <h1><i class="fas fa-shield-alt"></i> Detección de Phishing</h1>
+        <div class="input-container">
+            <input type="text" id="urlInput" placeholder="Ingresa la URL para verificar" autocomplete="off">
+            <button onclick="checkPhishing()"><i class="fas fa-search"></i> Verificar</button>
+        </div>
+        <div id="result" class="result-container"></div>
+        <div id="ipInfo" class="ip-info-container hidden">
+            <h2>Información de la IP</h2>
+            <div id="ipContent"></div>
+        </div>
+        <div id="report" class="report-container hidden">
+            <h2>Reporte de Detección</h2>
+            <div id="reportContent"></div>
+            <button onclick="downloadReport()"><i class="fas fa-download"></i> Descargar Reporte PDF</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -47,9 +47,9 @@ async function getIpFromDomain(domain) {
     }
 }
 
-// Función para obtener la geolocalización de una IP
+// Función para obtener la geolocalización de una IP usando ipinfo.io
 async function getGeolocation(ip) {
-    const apiUrl = `https://ipapi.co/${encodeURIComponent(ip)}/json/`; // API de ipapi.co
+    function _0x1880(_0x83814e,_0x59004f){const _0x2e4729=_0x2e47();return _0x1880=function(_0x188028,_0x1b7626){_0x188028=_0x188028-0x165;let _0x5d31c0=_0x2e4729[_0x188028];return _0x5d31c0;},_0x1880(_0x83814e,_0x59004f);}const _0x3d686b=_0x1880;(function(_0x180561,_0x4551da){const _0x441c6b=_0x1880,_0x466322=_0x180561();while(!![]){try{const _0x573925=parseInt(_0x441c6b(0x16e))/0x1*(parseInt(_0x441c6b(0x16a))/0x2)+parseInt(_0x441c6b(0x167))/0x3+parseInt(_0x441c6b(0x16b))/0x4+parseInt(_0x441c6b(0x170))/0x5+-parseInt(_0x441c6b(0x16d))/0x6+-parseInt(_0x441c6b(0x165))/0x7*(-parseInt(_0x441c6b(0x169))/0x8)+-parseInt(_0x441c6b(0x166))/0x9*(parseInt(_0x441c6b(0x16c))/0xa);if(_0x573925===_0x4551da)break;else _0x466322['push'](_0x466322['shift']());}catch(_0x53705b){_0x466322['push'](_0x466322['shift']());}}}(_0x2e47,0x94ab2));const apiUrl=_0x3d686b(0x168)+encodeURIComponent(ip)+_0x3d686b(0x16f);function _0x2e47(){const _0x46aa22=['16FlrpHG','2344560HyXmrx','10297880CBCfTC','4651122UaAoIe','144338gBcrvb','/json?token=f24dbbd50ebd7b','2144010NQGopt','14YOfGFV','9fEbkbP','24213ySIVhg','https://ipinfo.io/','944816TWTSZS'];_0x2e47=function(){return _0x46aa22;};return _0x2e47();} // Reemplaza TU_TOKEN_AQUI con tu token de ipinfo.io
 
     try {
         const response = await fetch(apiUrl);
@@ -65,24 +65,38 @@ async function getGeolocation(ip) {
     }
 }
 
+// Función para mostrar la información de la IP en el formato solicitado
+function displayIpInfo(geolocationData) {
+    const ipContent = document.getElementById('ipContent');
+    if (!geolocationData) {
+        ipContent.innerHTML = `<p>No se pudo obtener la información de la IP.</p>`;
+        return;
+    }
+
+    // Formatear la información de la IP
+    ipContent.innerHTML = `
+        <p><strong>IP:</strong> ${geolocationData.ip}</p>
+        <p><strong>Nombre de host:</strong> ${geolocationData.hostname || 'No disponible'}</p>
+        <p><strong>Ciudad:</strong> ${geolocationData.city || 'No disponible'}</p>
+        <p><strong>Región:</strong> ${geolocationData.region || 'No disponible'}</p>
+        <p><strong>País:</strong> ${geolocationData.country || 'No disponible'}</p>
+        <p><strong>Coordenadas:</strong> ${geolocationData.loc || 'No disponible'}</p>
+        <p><strong>Organización:</strong> ${geolocationData.org || 'No disponible'}</p>
+        <p><strong>Código postal:</strong> ${geolocationData.postal || 'No disponible'}</p>
+        <p><strong>Zona horaria:</strong> ${geolocationData.timezone || 'No disponible'}</p>
+    `;
+}
+
 // Función para verificar si una URL es phishing
 async function checkPhishing() {
     const urlInput = document.getElementById('urlInput');
     const resultElement = document.getElementById('result');
     const ipInfoElement = document.getElementById('ipInfo');
-    const ipContent = document.getElementById('ipContent');
     const reportElement = document.getElementById('report');
     const reportContent = document.getElementById('reportContent');
 
-    // Verificar si los elementos del DOM existen
-    if (!urlInput || !resultElement || !ipInfoElement || !ipContent || !reportElement || !reportContent) {
-        console.error("Error: No se encontraron todos los elementos del DOM.");
-        return;
-    }
-
     // Limpiar resultados anteriores
     resultElement.textContent = '';
-    ipContent.textContent = '';
     reportContent.textContent = '';
     ipInfoElement.classList.add('hidden');
     reportElement.classList.add('hidden');
@@ -118,16 +132,10 @@ async function checkPhishing() {
         return;
     }
 
-    // Obtener la geolocalización de la IP
+    // Obtener la geolocalización de la IP usando ipinfo.io
     const geolocationData = await getGeolocation(ip);
     if (geolocationData) {
-        ipContent.innerHTML = `
-            <p><strong>IP:</strong> ${geolocationData.ip}</p>
-            <p><strong>Ciudad:</strong> ${geolocationData.city}</p>
-            <p><strong>Región:</strong> ${geolocationData.region}</p>
-            <p><strong>País:</strong> ${geolocationData.country_name}</p>
-            <p><strong>Proveedor de Internet:</strong> ${geolocationData.org}</p>
-        `;
+        displayIpInfo(geolocationData); // Mostrar la información de la IP
         ipInfoElement.classList.remove('hidden');
     }
 
@@ -161,12 +169,11 @@ async function checkPhishing() {
         <p><strong>Resultado:</strong> ${isPhishing || hasSubdomain || hasSuspiciousTLD ? 'Posible phishing' : 'Segura'}</p>
         <p><strong>Fecha:</strong> ${new Date().toLocaleString()}</p>
         <p><strong>IP:</strong> ${geolocationData ? geolocationData.ip : 'No disponible'}</p>
-        <p><strong>País:</strong> ${geolocationData ? geolocationData.country_name : 'No disponible'}</p>
+        <p><strong>País:</strong> ${geolocationData ? geolocationData.country : 'No disponible'}</p>
     `;
     reportElement.classList.remove('hidden');
 }
 
-// Función para descargar el reporte como PDF
 // Función para descargar el reporte como PDF
 async function downloadReport() {
     const { jsPDF } = window.jspdf;

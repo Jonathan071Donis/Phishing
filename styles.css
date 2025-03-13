@@ -39,6 +39,7 @@ body {
     z-index: 2;
     margin: 20px; /* Añadir margen para evitar que toque los bordes */
     box-sizing: border-box; /* Añadir box-sizing */
+    overflow: hidden; /* Asegurar que el contenido no se desborde */
 }
 
 .container:hover {
@@ -78,6 +79,8 @@ input[type="text"] {
     transition: 0.3s;
     box-sizing: border-box; /* Añadir box-sizing */
     max-width: 100%; /* Asegurar que no se desborde */
+    word-wrap: break-word; /* Asegurar que las URLs largas se rompan */
+    white-space: normal; /* Asegurar que el texto se ajuste */
 }
 
 input[type="text"]::placeholder {
@@ -117,6 +120,8 @@ button:hover {
     font-weight: bold;
     transition: 0.3s;
     box-sizing: border-box; /* Añadir box-sizing */
+    word-wrap: break-word; /* Asegurar que las URLs largas se rompan */
+    white-space: normal; /* Asegurar que el texto se ajuste */
 }
 
 /* Estilos para el resultado */

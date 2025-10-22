@@ -3,31 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detección de Phishing</title>
+    <title>PhishShield Pro - Detección Avanzada de Phishing</title>
+    <meta name="description" content="Herramienta profesional de detección de phishing con análisis avanzado y machine learning">
+    <meta name="keywords" content="phishing, seguridad, ciberseguridad, detección, análisis, red team">
     <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/12028/12028014.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="overlay"></div>
     <div class="container">
-        <h1><i class="fas fa-shield-alt"></i> Detección de Phishing</h1>
-        <div class="input-container">
-            <input type="text" id="urlInput" placeholder="Ingresa la URL para verificar" autocomplete="off">
-            <button onclick="checkPhishing()"><i class="fas fa-search"></i> Verificar</button>
+        <header class="header">
+            <div class="logo-container">
+                <i class="fas fa-shield-alt"></i>
+                <div>
+                    <h1>PhishShield Pro</h1>
+                    <p class="subtitle">Detección Avanzada de Phishing - Red Team</p>
+                </div>
+            </div>
+        </header>
+        
+        <div class="input-section">
+            <div class="input-container">
+                <div class="input-group">
+                    <input type="text" id="urlInput" placeholder="Ingresa la URL para analizar (ej: https://ejemplo.com)" autocomplete="off">
+                    <button id="analyzeBtn" onclick="checkPhishing()">
+                        <i class="fas fa-search"></i> Analizar URL
+                    </button>
+                </div>
+                <div class="loading-container hidden" id="loadingIndicator">
+                    <div class="spinner"></div>
+                    <p>Analizando URL con técnicas de Red Team...</p>
+                </div>
+            </div>
         </div>
-        <div id="result" class="result-container"></div>
-        <div id="ipInfo" class="ip-info-container hidden">
-            <h2>Información de la IP</h2>
-            <div id="ipContent"></div>
+        
+        <div id="result" class="result-container hidden">
+            <div class="result-header">
+                <h2 id="resultTitle">Resultado del Análisis</h2>
+                <div id="resultIcon"></div>
+            </div>
+            <div id="resultContent"></div>
         </div>
+        
+        <div id="detailedAnalysis" class="detailed-analysis-container hidden">
+            <h2><i class="fas fa-search-plus"></i> Análisis Detallado - Red Team</h2>
+            <div class="analysis-grid">
+                <div class="analysis-card">
+                    <h3><i class="fas fa-globe"></i> Información del Dominio</h3>
+                    <div id="domainInfo" class="analysis-content"></div>
+                </div>
+                <div class="analysis-card">
+                    <h3><i class="fas fa-map-marker-alt"></i> Geolocalización</h3>
+                    <div id="geolocationInfo" class="analysis-content"></div>
+                </div>
+                <div class="analysis-card">
+                    <h3><i class="fas fa-chart-bar"></i> Puntuación de Riesgo</h3>
+                    <div class="risk-score" id="riskScoreContainer">
+                        <div class="score-circle">
+                            <span id="riskScore">0</span>
+                        </div>
+                        <div class="score-description" id="riskDescription"></div>
+                    </div>
+                </div>
+                <div class="analysis-card">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Indicadores de Riesgo</h3>
+                    <div id="riskIndicators" class="analysis-content"></div>
+                </div>
+            </div>
+            
+            <div class="advanced-analysis">
+                <h3><i class="fas fa-brain"></i> Análisis de Red Team</h3>
+                <div class="analysis-grid">
+                    <div class="analysis-card">
+                        <h4><i class="fas fa-fingerprint"></i> Huella Digital</h4>
+                        <div id="fingerprintInfo" class="analysis-content"></div>
+                    </div>
+                    <div class="analysis-card">
+                        <h4><i class="fas fa-clock"></i> Análisis Temporal</h4>
+                        <div id="temporalInfo" class="analysis-content"></div>
+                    </div>
+                    <div class="analysis-card">
+                        <h4><i class="fas fa-code"></i> Análisis Técnico</h4>
+                        <div id="technicalInfo" class="analysis-content"></div>
+                    </div>
+                    <div class="analysis-card">
+                        <h4><i class="fas fa-user-secret"></i> Técnicas de Evasión</h4>
+                        <div id="evasionInfo" class="analysis-content"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="riskChart"></canvas>
+            </div>
+        </div>
+        
         <div id="report" class="report-container hidden">
-            <h2>Reporte de Detección</h2>
-            <div id="reportContent"></div>
-            <button onclick="downloadReport()"><i class="fas fa-download"></i> Descargar Reporte PDF</button>
+            <div class="report-header">
+                <h2><i class="fas fa-file-pdf"></i> Reporte de Detección</h2>
+                <button onclick="downloadReport()" class="download-btn">
+                    <i class="fas fa-download"></i> Descargar PDF Profesional
+                </button>
+            </div>
+            <div id="reportContent" class="report-content"></div>
+        </div>
+        
+        <footer class="footer">
+            <p>PhishShield Pro &copy; 2024 - Herramienta avanzada de detección de phishing para equipos Red Team</p>
+        </footer>
+    </div>
+    
+    <!-- Modal para información adicional -->
+    <div id="infoModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h3 id="modalTitle">Información</h3>
+            <div id="modalContent"></div>
         </div>
     </div>
+    
     <script src="script.js"></script>
 </body>
 </html>
